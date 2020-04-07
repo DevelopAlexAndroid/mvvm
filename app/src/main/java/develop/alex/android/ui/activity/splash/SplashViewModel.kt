@@ -1,4 +1,4 @@
-package develop.alex.android.ui.splash
+package develop.alex.android.ui.activity.splash
 
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData

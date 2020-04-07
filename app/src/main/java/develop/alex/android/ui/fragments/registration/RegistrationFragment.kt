@@ -1,4 +1,4 @@
-package develop.alex.android.ui.fragments
+package develop.alex.android.ui.fragments.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import develop.alex.android.R
-
+//ViewModel с DataBinding
 class RegistrationFragment : Fragment() {
 
     override fun onCreateView(

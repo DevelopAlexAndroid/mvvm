@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import develop.alex.android.R
 import kotlinx.android.synthetic.main.fragment_login.*
-
+//ViewModel без dataBinding
 class LoginFragment : Fragment() {
 
     override fun onCreateView(

@@ -1,16 +1,14 @@
-package develop.alex.android.ui.splash
+package develop.alex.android.ui.activity.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
-import develop.alex.android.ui.Const.USER_IS_AUTHORIZED
-import develop.alex.android.ui.main.MainActivity
+import develop.alex.android.providers.Const.USER_IS_AUTHORIZED
+import develop.alex.android.ui.activity.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 

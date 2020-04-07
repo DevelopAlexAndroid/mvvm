@@ -1,16 +1,23 @@
 package develop.alex.android.ui.fragments.user_details
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
-import kotlinx.android.synthetic.main.fragment_user_details.*
+import develop.alex.android.di.Injectable
+import develop.alex.android.providers.ViewModelFactory
+import javax.inject.Inject
 
-class UserDetailsFragment : Fragment() {
+//ViewModel MVI
+class UserDetailsFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +28,10 @@ class UserDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
+        viewModel.test()
+
     }
 
 }

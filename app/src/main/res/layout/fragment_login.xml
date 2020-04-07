@@ -10,37 +10,37 @@
         android:id="@+id/image_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/logo"
         android:src="@drawable/splash_image"
         app:layout_constraintBottom_toTopOf="@+id/center_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ed_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/number"
+        android:autofillHints="@string/number"
         android:ems="10"
+        android:hint="@string/number"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/center_line"
-        android:autofillHints="@string/number" />
+        app:layout_constraintTop_toTopOf="@+id/center_line" />
 
     <EditText
         android:id="@+id/ed_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="@string/password"
+        android:autofillHints="@string/password"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_phone"
-        android:autofillHints="@string/password" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_phone" />
 
     <Button
         android:id="@+id/but_come_in"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="353dp" />
+        app:layout_constraintGuide_begin="270dp" />
 
     <Button
         android:id="@+id/register"
@@ -66,6 +66,8 @@
         android:text="@string/registration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/but_come_in"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
