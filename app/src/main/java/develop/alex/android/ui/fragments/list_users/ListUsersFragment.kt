@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import develop.alex.android.App
 import develop.alex.android.R
 import develop.alex.android.di.Injectable
 import develop.alex.android.providers.ViewModelFactory
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class ListUsersFragment : Fragment(), Injectable {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory<ListUsersViewModel>
+
     private lateinit var viewModel: ListUsersViewModel
 
     override fun onCreateView(

@@ -9,13 +9,14 @@ import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
 import develop.alex.android.di.Injectable
 import develop.alex.android.providers.ViewModelFactory
+import develop.alex.android.ui.fragments.list_users.ListUsersViewModel
 import javax.inject.Inject
 
 //ViewModel MVI
 class UserDetailsFragment : Fragment(), Injectable {
 
     @Inject
-    lateinit var factory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory<UserViewModel>
 
     private lateinit var viewModel: UserViewModel
 
@@ -29,7 +30,7 @@ class UserDetailsFragment : Fragment(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
         viewModel.test()
 
     }

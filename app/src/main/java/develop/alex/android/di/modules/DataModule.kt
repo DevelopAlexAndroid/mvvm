@@ -6,6 +6,7 @@ import dagger.Provides
 import develop.alex.android.data.repository.ListUsersRepository
 import develop.alex.android.data.repository.LoginRepository
 import develop.alex.android.data.repository.UserDetailsRepository
+import develop.alex.android.providers.SharedPreferencesProvider
 import javax.inject.Singleton
 
 @Module
@@ -16,8 +17,10 @@ class DataModule {
     * */
     @Singleton
     @Provides
-    fun providesListRepository(context: Context): ListUsersRepository {
-        return ListUsersRepository(context)
+    fun providesListRepository(
+        context: Context,
+        sharedPreferencesProvider: SharedPreferencesProvider): ListUsersRepository {
+        return ListUsersRepository(context, sharedPreferencesProvider)
     }
 
     @Singleton

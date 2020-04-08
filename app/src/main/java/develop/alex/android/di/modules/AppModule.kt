@@ -8,7 +8,7 @@ import develop.alex.android.App
 import develop.alex.android.providers.SharedPreferencesProvider
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelsModule::class])
+@Module
 class AppModule {
 
     @Singleton

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class App : Application(), HasActivityInjector {
 
-    @Inject
+    @Inject // It implements Dagger machinery of finding appropriate injector factory for a type.
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
@@ -19,5 +19,4 @@ class App : Application(), HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
-
 }
