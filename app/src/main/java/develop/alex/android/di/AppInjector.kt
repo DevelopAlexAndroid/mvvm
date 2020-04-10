@@ -16,9 +16,10 @@ import develop.alex.android.App
  **/
 interface Injectable
 
-//unchecked cast for ViewModel
-@Suppress("unchecked")
 object AppInjector {
+
+    @Suppress("UNCHECKED_CAST")
+    //unchecked cast for ViewModel
     fun init(app: App) {
         // Here we initialize Dagger. DaggerAppComponent is auto-generated from AppComponent.
         DaggerAppComponent

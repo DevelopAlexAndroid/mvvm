@@ -16,24 +16,24 @@ import develop.alex.android.providers.Const.USER_IS_AUTHORIZED
 import develop.alex.android.ui.fragments.list_users.ListUsersViewModel
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, MainInteractor.View {
 
     @Inject //Реализует механизм Dagger для поиска подходящей Factory Injectors для типа.
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var presenter: MainPresenter
 
-    private lateinit var listUsersViewModel: ListUsersViewModel
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        presenter.onCreate()
+    }
 
-        //TEST ViewModel of dagger
-        listUsersViewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(ListUsersViewModel::class.java)
-        listUsersViewModel.test("MainActivity")
-
+    override fun navigateTo() {
         //getARGS
         val s = intent.extras?.getBoolean(USER_IS_AUTHORIZED)
         Log.d(APP_TAG, "bundle $s")
@@ -53,7 +53,5 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         navController.graph = graph
     }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
 }

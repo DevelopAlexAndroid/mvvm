@@ -15,7 +15,7 @@ class UserViewModel
 
     fun test() {
         Log.d(Const.APP_TAG, "UserViewModel")
-        repository.test()
+        repository.getUser()
         sharedPref.saveData()
     }
 

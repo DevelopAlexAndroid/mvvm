@@ -1,14 +1,13 @@
 package develop.alex.android.data.repository
 
-import android.content.Context
-import android.util.Log
-import develop.alex.android.providers.Const
+import develop.alex.android.data.ApiGitHub
+import develop.alex.android.data.pojo.ListUserModel
+import io.reactivex.Single
 import javax.inject.Inject
 
-class ListUsersRepository @Inject constructor(context: Context) {
+class ListUsersRepository @Inject constructor(private val apiGitHub: ApiGitHub) {
 
-    fun test() {
-        Log.d(Const.APP_TAG, "123123123123")
-
+    fun getUsers(): Single<List<ListUserModel>> {
+        return apiGitHub.getListUsers()
     }
 }

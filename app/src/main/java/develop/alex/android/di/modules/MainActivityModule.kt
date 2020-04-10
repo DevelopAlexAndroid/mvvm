@@ -7,7 +7,7 @@ import develop.alex.android.ui.activity.main.MainActivity
 @Module
 abstract class MainActivityModule {
 
-    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
+    @ContributesAndroidInjector(modules = [MainModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
 }

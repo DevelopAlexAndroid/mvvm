@@ -4,6 +4,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import develop.alex.android.App
+import develop.alex.android.di.modules.ApiModule
 import develop.alex.android.di.modules.AppModule
 import develop.alex.android.di.modules.DataModule
 import develop.alex.android.di.modules.MainActivityModule
@@ -15,6 +16,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         AppModule::class,
         DataModule::class,
+        ApiModule::class,
         MainActivityModule::class
     ]
 )

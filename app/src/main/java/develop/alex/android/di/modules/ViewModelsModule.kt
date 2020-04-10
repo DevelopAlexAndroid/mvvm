@@ -20,20 +20,17 @@ abstract class ViewModelsModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    //ViewModel for ListUsersFragment
+    //ViewModels
     @Binds
     @IntoMap
     @ViewModelKey(ListUsersViewModel::class)
     abstract fun bindListUsersViewModel(listUsersViewModel: ListUsersViewModel): ViewModel
 
-    //ViewModel for LoginFragment
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
-
-    //ViewModel for UserDetailsFragment
     @Binds
     @IntoMap
     @ViewModelKey(UserViewModel::class)

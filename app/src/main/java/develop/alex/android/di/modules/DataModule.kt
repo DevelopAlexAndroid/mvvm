@@ -1,10 +1,11 @@
 package develop.alex.android.di.modules
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
+import develop.alex.android.data.ApiGitHub
 import develop.alex.android.data.repository.ListUsersRepository
 import develop.alex.android.data.repository.LoginRepository
+import develop.alex.android.data.repository.MainRepository
 import develop.alex.android.data.repository.UserDetailsRepository
 import javax.inject.Singleton
 
@@ -16,21 +17,25 @@ class DataModule {
     * */
     @Singleton
     @Provides
-    fun providesListRepository(context: Context): ListUsersRepository {
-        return ListUsersRepository(context)
-    }
+    fun providesListRepository(apiGitHub: ApiGitHub):
+            ListUsersRepository = ListUsersRepository(apiGitHub)
+
 
     @Singleton
     @Provides
-    fun providesUserRepository(context: Context): UserDetailsRepository {
-        return UserDetailsRepository(context)
-    }
+    fun providesUserRepository(apiGitHub: ApiGitHub):
+            UserDetailsRepository = UserDetailsRepository(apiGitHub)
+
 
     @Singleton
     @Provides
-    fun providesRepository(context: Context): LoginRepository {
-        return LoginRepository(context)
-    }
+    fun providesLoginRepository(apiGitHub: ApiGitHub):
+            LoginRepository = LoginRepository(apiGitHub)
+
+
+    @Singleton
+    @Provides
+    fun providesMainRepository(): MainRepository = MainRepository()
 
     /**
      * DataBase Room
