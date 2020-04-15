@@ -6,4 +6,7 @@ object Const {
     const val USER_IS_AUTHORIZED = "USER_IS_AUTHORIZED"
 
     const val API_GITHUB = "https://api.github.com/"
+
+    //BUNDLE Const
+    const val ITEM_NAME = "ITEM_NAME"
 }

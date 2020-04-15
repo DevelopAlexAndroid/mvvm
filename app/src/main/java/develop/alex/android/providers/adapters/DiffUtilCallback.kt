@@ -1,4 +1,4 @@
-package develop.alex.android.providers
+package develop.alex.android.providers.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import develop.alex.android.data.pojo.ListUserModel

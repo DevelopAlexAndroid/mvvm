@@ -1,4 +1,4 @@
-package develop.alex.android.providers
+package develop.alex.android.providers.adapters
 
 import android.graphics.Canvas
 import android.graphics.Rect

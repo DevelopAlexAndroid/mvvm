@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, MainIntera
     override fun navigateTo() {
         //getARGS
         val s = intent.extras?.getBoolean(USER_IS_AUTHORIZED)
-        Log.d(APP_TAG, "bundle $s")
+        Log.d(APP_TAG, "MainActivity.navigateTo bundle authorization = $s")
 
         //dynamic navigate components
         val navHost =
