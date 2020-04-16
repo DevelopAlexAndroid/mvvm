@@ -13,4 +13,5 @@
     <string name="avatar">avatar</string>
     <string name="info">info</string>
     <string name="updateList">обновить список</string>
+    <string name="error_network">Ошибка соединения</string>
 </resources>

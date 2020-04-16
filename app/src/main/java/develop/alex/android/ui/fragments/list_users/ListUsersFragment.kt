@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.facebook.shimmer.ShimmerFrameLayout
 import develop.alex.android.R
+import develop.alex.android.data.pojo.ListUserModel
 import develop.alex.android.di.Injectable
-import develop.alex.android.providers.Const
+import develop.alex.android.providers.Const.APP_TAG
 import develop.alex.android.providers.Const.ITEM_NAME
 import develop.alex.android.providers.ViewModelFactory
 import develop.alex.android.providers.adapters.DiffUtilCallback
@@ -51,23 +52,24 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
             .of(this, viewModelFactory)
             .get(ListUsersViewModel::class.java)
 
-
         setupUI()
         setupAdapter()
 
-        // setupLoadDataInLifeCycleMethod()     //load every onCreated
-        //setupLoadDataInLazy()                 //load only once, but not parameter
-        setupLoadDataInLazyMap("1")             //load only once if new key
+        // setupLoadDataInLifeCycleMethod()      //load every onCreated
+        //setupLoadDataInLazy()                      //load only once, but not parameter
+        //  setupLoadDataInLazyMap("1")              //load only once if new key.
+        // Если требуется обновление данных при каждом входе на этот экран,
+        // то можно обнулить ключи LazyMap при навигации   viewModel.clearLazyMap()
+        setupLoadDataInLazyMapWithMvi("1")
     }
 
     override fun itemClick(name: String) {
-        Log.d(Const.APP_TAG, "itemClick - $name")
+        Log.d(APP_TAG, "itemClick - $name")
         val bundle = bundleOf(
             ITEM_NAME to name
         )
         but_check.findNavController()
             .navigate(R.id.action_listUsersFragment_to_userDetailsFragment, bundle)
-
     }
 
     private fun setupUI() {
@@ -94,39 +96,76 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
         //    CustomDecoration
         list_users.addItemDecoration(
             UserAdapterDecoration(
-                resources.getDrawable(R.drawable.divider, activity?.theme)
+                resources.getDrawable(
+                    R.drawable.divider,
+                    activity?.theme
+                )
             )
         )
     }
 
-
     private fun setupLoadDataInLifeCycleMethod() {
         viewModel.onCreate()
         viewModel.users.observe(viewLifecycleOwner, Observer {
-            Log.d(Const.APP_TAG, "viewModel.users.observe - ")
-            usersAdapter.setData(it)
-            (shimmer as ShimmerFrameLayout).stopShimmer()
-            shimmer.visibility = View.GONE
+            Log.d(APP_TAG, "viewModel.users.observe - ")
+            showData(it)
         })
     }
 
     private fun setupLoadDataInLazy() {
         viewModel.loadUsersLazy().observe(viewLifecycleOwner, Observer {
-            Log.d(Const.APP_TAG, "viewModel.loadUsers().observe - ")
-            this.applyDiffAdapter(usersAdapter, usersAdapter.users, it)
-            (shimmer as ShimmerFrameLayout).stopShimmer()
-            shimmer.visibility = View.GONE
+            Log.d(APP_TAG, "viewModel.loadUsers().observe - ")
+            showData(it)
         })
     }
 
     private fun setupLoadDataInLazyMap(parameter: String) {
         viewModel.loadUsersLazyMap(parameter).observe(viewLifecycleOwner, Observer {
-            Log.d(Const.APP_TAG, "viewModel.setupLoadDataInLazyMap(parameter: String).observe - $parameter")
-            this.applyDiffAdapter(usersAdapter, usersAdapter.users, it)
-            (shimmer as ShimmerFrameLayout).stopShimmer()
-            shimmer.visibility = View.GONE
+            Log.d(APP_TAG, "viewModel.setupLoadDataInLazyMap.observe - $parameter")
+            showData(it)
         })
     }
 
+    private fun setupLoadDataInLazyMapWithMvi(parameter: String) {
+        viewModel.loadUsersLazyMapWithMvi(parameter).observe(viewLifecycleOwner, Observer {
+            Log.d(APP_TAG, "viewModel.setupLoadDataInLazyMapWithMvi.observe - $parameter")
+            when (it) {
+                ListUsersState.Loading -> {
+                    Log.d(APP_TAG, "ListUsersState.Loading")
+                    showLoad()
+                }
+                is ListUsersState.ShowData -> {
+                    Log.d(APP_TAG, "ListUsersState.ShowData")
+                    showData(it.data)
+                }
+                ListUsersState.ErrorNetwork -> {
+                    Log.d(APP_TAG, "ListUsersState.ErrorNetwork")
+                    showError()
+                }
+            }
+        })
+    }
+
+    private fun showData(data: List<ListUserModel>) {
+        list_users.visibility = View.VISIBLE
+        this.applyDiffAdapter(usersAdapter, usersAdapter.users, data)
+        (shimmer as ShimmerFrameLayout).stopShimmer()
+        shimmer.visibility = View.GONE
+        text_error.visibility = View.GONE
+    }
+
+    private fun showLoad() {
+        (shimmer as ShimmerFrameLayout).startShimmer()
+        shimmer.visibility = View.VISIBLE
+        list_users.visibility = View.GONE
+        text_error.visibility = View.GONE
+
+    }
+
+    private fun showError() {
+        (shimmer as ShimmerFrameLayout).stopShimmer()
+        shimmer.visibility = View.GONE
+        text_error.visibility = View.VISIBLE
+    }
 
 }
