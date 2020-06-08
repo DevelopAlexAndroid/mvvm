@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.facebook.shimmer.ShimmerFrameLayout
 import develop.alex.android.R
+import develop.alex.android.data.ListUsersParameters
 import develop.alex.android.data.pojo.ListUserModel
 import develop.alex.android.di.Injectable
 import develop.alex.android.providers.Const.APP_TAG
@@ -33,7 +34,6 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     @Inject
     lateinit var usersAdapter: UsersAdapter
 
@@ -60,7 +60,7 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
         //  setupLoadDataInLazyMap("1")              //load only once if new key.
         // Если требуется обновление данных при каждом входе на этот экран,
         // то можно обнулить ключи LazyMap при навигации   viewModel.clearLazyMap()
-        setupLoadDataInLazyMapWithMvi("1")
+        setupLoadDataInLazyMapWithMvi(ListUsersParameters("1", "2", 2))
     }
 
     override fun itemClick(name: String) {
@@ -88,7 +88,6 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
     private fun setupAdapter() {
         list_users.itemAnimator = DefaultItemAnimator()
         list_users.adapter = usersAdapter
-
         //itemDecoration может быть много
         //    itemDecoration default
         //val divider = DividerItemDecoration(activity?.applicationContext, VERTICAL)
@@ -126,24 +125,25 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
         })
     }
 
-    private fun setupLoadDataInLazyMapWithMvi(parameter: String) {
-        viewModel.loadUsersLazyMapWithMvi(parameter).observe(viewLifecycleOwner, Observer {
-            Log.d(APP_TAG, "viewModel.setupLoadDataInLazyMapWithMvi.observe - $parameter")
-            when (it) {
-                ListUsersState.Loading -> {
-                    Log.d(APP_TAG, "ListUsersState.Loading")
-                    showLoad()
+    private fun setupLoadDataInLazyMapWithMvi(parameter: ListUsersParameters) {
+        viewModel.loadUsersLazyMapWithMvi(parameter)
+            .observe(viewLifecycleOwner, Observer {
+                Log.d(APP_TAG, "viewModel.setupLoadDataInLazyMapWithMvi.observe - $parameter")
+                when (it) {
+                    ListUsersState.Loading -> {
+                        Log.d(APP_TAG, "ListUsersState.Loading")
+                        showLoad()
+                    }
+                    is ListUsersState.ShowData -> {
+                        Log.d(APP_TAG, "ListUsersState.ShowData")
+                        showData(it.data)
+                    }
+                    ListUsersState.ErrorNetwork -> {
+                        Log.d(APP_TAG, "ListUsersState.ErrorNetwork")
+                        showError()
+                    }
                 }
-                is ListUsersState.ShowData -> {
-                    Log.d(APP_TAG, "ListUsersState.ShowData")
-                    showData(it.data)
-                }
-                ListUsersState.ErrorNetwork -> {
-                    Log.d(APP_TAG, "ListUsersState.ErrorNetwork")
-                    showError()
-                }
-            }
-        })
+            })
     }
 
     private fun showData(data: List<ListUserModel>) {
@@ -159,7 +159,6 @@ class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
         shimmer.visibility = View.VISIBLE
         list_users.visibility = View.GONE
         text_error.visibility = View.GONE
-
     }
 
     private fun showError() {

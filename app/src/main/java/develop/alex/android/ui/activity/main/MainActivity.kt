@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, MainIntera
         val navInflater = navController.navInflater
         val graph = navInflater.inflate(R.navigation.nav_graph)
 
-        if (s!!)
+        if (!s!!)
             graph.startDestination = R.id.loginFragment
         else
             graph.startDestination = R.id.nav_graph_users
