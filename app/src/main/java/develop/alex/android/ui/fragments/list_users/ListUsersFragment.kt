@@ -29,7 +29,6 @@ import develop.alex.android.ui.adapters.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_list_users.*
 import javax.inject.Inject
 
-//ViewModel из своей фабрики
 class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
 
     @Inject

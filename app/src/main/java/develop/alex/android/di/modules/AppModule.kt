@@ -1,7 +1,6 @@
 package develop.alex.android.di.modules
 
 import android.content.Context
-import android.widget.ShareActionProvider
 import dagger.Module
 import dagger.Provides
 import develop.alex.android.App
@@ -17,6 +16,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(context: Context): SharedPreferencesProvider = SharedPreferencesProvider(context)
+    fun provideSharedPreferences(context: Context):
+            SharedPreferencesProvider = SharedPreferencesProvider(context)
 
 }

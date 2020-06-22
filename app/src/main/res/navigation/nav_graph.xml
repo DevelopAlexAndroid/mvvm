@@ -16,8 +16,24 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="develop.alex.android.ui.fragments.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_registrationFragment_to_nav_graph_users"
+            app:destination="@id/nav_graph_users" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_registrationFragment"
+        app:destination="@id/registrationFragment" />
+
     <navigation
         android:id="@+id/nav_graph_users"
         app:startDestination="@id/listUsersFragment">
@@ -40,16 +56,4 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
     </navigation>
-    <fragment
-        android:id="@+id/registrationFragment"
-        android:name="develop.alex.android.ui.fragments.registration.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration">
-        <action
-            android:id="@+id/action_registrationFragment_to_nav_graph_users"
-            app:destination="@id/nav_graph_users" />
-    </fragment>
-    <action
-        android:id="@+id/action_global_registrationFragment"
-        app:destination="@id/registrationFragment" />
 </navigation>

@@ -10,10 +10,11 @@ import androidx.navigation.findNavController
 import develop.alex.android.R
 import develop.alex.android.di.Injectable
 import develop.alex.android.providers.ViewModelFactory
+import develop.alex.android.ui.fragments.list_users.ListUsersFragment
+import kotlinx.android.synthetic.main.fragment_list_users.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-//ViewModel без dataBinding
 class LoginFragment : Fragment(), Injectable {
 
     @Inject
@@ -30,15 +31,32 @@ class LoginFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        but_come_in.setOnClickListener {
-            //but_come_in.findNavController().navigate(R.id.action_loginFragment_to_listUsersFragment)
-            but_come_in.findNavController().navigate(R.id.action_global_registrationFragment)
-        }
-
         viewModel = ViewModelProviders
             .of(this, viewModelFactory)
             .get(LoginViewModel::class.java)
 
-        viewModel.sigIn()
+        setupOnClick()
     }
+
+    private fun setupOnClick() {
+        but_come_in.setOnClickListener {
+            //Call to check apiKEy
+        }
+        but_register.setOnClickListener {
+            if (checkFastClick())
+                but_come_in.findNavController()
+                    .navigate(R.id.action_global_registrationFragment)
+        }
+        but_demo.setOnClickListener {
+            viewModel.sigIn()
+            if (checkFastClick())
+                but_demo.findNavController()
+                    .navigate(R.id.action_loginFragment_to_listUsersFragment)
+        }
+    }
+
+    //Проблема быстро клика в nav_graph - краш
+    private fun checkFastClick():
+            Boolean = but_demo.findNavController().currentDestination?.id == R.id.loginFragment
+
 }

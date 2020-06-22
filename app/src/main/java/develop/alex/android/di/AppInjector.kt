@@ -12,7 +12,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import develop.alex.android.App
 
 /**
- * Пустой пустой интерфейс, который провацирует автоматический inject activity или fragment
+ * Пустой интерфейс, который провацирует автоматический inject activity или fragment
  **/
 interface Injectable
 

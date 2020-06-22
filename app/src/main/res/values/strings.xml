@@ -14,4 +14,11 @@
     <string name="info">info</string>
     <string name="updateList">обновить список</string>
     <string name="error_network">Ошибка соединения</string>
+    <string name="demo">Demo</string>
+    <string name="data_fot_you">Заполните данные о себе</string>
+    <string name="register">register</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+    <string name="check_passwrod">Повторите пароль</string>
 </resources>

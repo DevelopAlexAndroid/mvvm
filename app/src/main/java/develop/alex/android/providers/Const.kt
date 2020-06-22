@@ -11,4 +11,7 @@ object Const {
 
     //BUNDLE Const
     const val ITEM_NAME = "ITEM_NAME"
+    //SharedPreferences Const
+    const val SP_SETTINGS = "APP_SETTINGS"
+    const val KEY_AUTHORIZATION = "KEY_AUTHORIZATION"
 }

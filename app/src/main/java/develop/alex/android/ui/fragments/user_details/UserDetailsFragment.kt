@@ -12,7 +12,6 @@ import develop.alex.android.providers.Const.ITEM_NAME
 import develop.alex.android.providers.ViewModelFactory
 import javax.inject.Inject
 
-//ViewModel MVI
 class UserDetailsFragment : Fragment(), Injectable {
 
     @Inject

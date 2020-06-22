@@ -38,7 +38,7 @@ class DataModule {
     fun providesMainRepository(): MainRepository = MainRepository()
 
     /**
-     * DataBase Room
+     * DataBase Room/Realm
     * */
     //...
 }
