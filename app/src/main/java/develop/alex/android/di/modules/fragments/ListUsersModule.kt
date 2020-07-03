@@ -1,15 +1,10 @@
-package develop.alex.android.di.modules
+package develop.alex.android.di.modules.fragments
 
 import dagger.Module
 import dagger.Provides
 import develop.alex.android.ui.adapters.ListenerAdapter
 import develop.alex.android.ui.adapters.UsersAdapter
 import develop.alex.android.ui.fragments.list_users.ListUsersFragment
-import javax.inject.Scope
-
-@Scope
-@Retention(AnnotationRetention.SOURCE)
-annotation class FragmentScope
 
 @Module
 class ListUsersModule {

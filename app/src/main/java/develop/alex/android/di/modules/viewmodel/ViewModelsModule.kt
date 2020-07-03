@@ -1,17 +1,17 @@
-package develop.alex.android.di.modules
+package develop.alex.android.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import develop.alex.android.data.repository.MainRepository
-import develop.alex.android.di.ViewModelKey
+import develop.alex.android.di.modules.viewmodel.ViewModelKey
 import develop.alex.android.providers.ViewModelFactory
 import develop.alex.android.ui.activity.main.MainViewModel
 import develop.alex.android.ui.activity.splash.SplashViewModel
 import develop.alex.android.ui.fragments.list_users.ListUsersViewModel
 import develop.alex.android.ui.fragments.login.LoginViewModel
+import develop.alex.android.ui.fragments.registration.RegistrationViewModel
 import develop.alex.android.ui.fragments.user_details.UserViewModel
 
 @Module
@@ -49,5 +49,10 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(UserViewModel::class)
     abstract fun bindUserViewModel(usersViewModel: UserViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegistrationViewModel::class)
+    abstract fun bindRegistrationViewModel(registrationViewModel: RegistrationViewModel): ViewModel
 
 }

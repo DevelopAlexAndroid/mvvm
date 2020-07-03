@@ -3,10 +3,8 @@ package develop.alex.android.di.modules
 import dagger.Module
 import dagger.Provides
 import develop.alex.android.data.ApiGitHub
-import develop.alex.android.data.repository.ListUsersRepository
-import develop.alex.android.data.repository.LoginRepository
-import develop.alex.android.data.repository.MainRepository
-import develop.alex.android.data.repository.UserDetailsRepository
+import develop.alex.android.data.repository.*
+import develop.alex.android.providers.SharedPreferencesProvider
 import javax.inject.Singleton
 
 @Module
@@ -36,6 +34,10 @@ class DataModule {
     @Singleton
     @Provides
     fun providesMainRepository(): MainRepository = MainRepository()
+
+    @Singleton
+    @Provides
+    fun providesRegistrationRepository(shprProvider: SharedPreferencesProvider): RegistrationRepository = RegistrationRepository(shprProvider)
 
     /**
      * DataBase Room/Realm

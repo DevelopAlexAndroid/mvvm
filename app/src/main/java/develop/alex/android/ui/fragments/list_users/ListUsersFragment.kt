@@ -16,7 +16,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import develop.alex.android.R
 import develop.alex.android.data.ListUsersParameters
 import develop.alex.android.data.pojo.ListUserModel
-import develop.alex.android.di.Injectable
+import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.Const.APP_TAG
 import develop.alex.android.providers.Const.ITEM_NAME
 import develop.alex.android.providers.ViewModelFactory
@@ -29,7 +29,8 @@ import develop.alex.android.ui.adapters.UsersAdapter
 import kotlinx.android.synthetic.main.fragment_list_users.*
 import javax.inject.Inject
 
-class ListUsersFragment : Fragment(), Injectable, ListenerAdapter {
+class ListUsersFragment : Fragment(),
+    Injectable, ListenerAdapter {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory

@@ -1,4 +1,4 @@
-package develop.alex.android.di
+package develop.alex.android.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

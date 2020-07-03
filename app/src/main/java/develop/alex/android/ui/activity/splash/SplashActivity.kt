@@ -2,27 +2,23 @@ package develop.alex.android.ui.activity.splash
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
-import develop.alex.android.di.Injectable
-import develop.alex.android.providers.Const.USER_IS_AUTHORIZED
+import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.ViewModelFactory
 import develop.alex.android.ui.activity.main.MainActivity
-import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
-class SplashActivity : FragmentActivity(), Injectable {
+class SplashActivity : FragmentActivity(),
+    Injectable {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     //private lateinit var splashDataBinding: ActivitySplashBinding
     private lateinit var viewModel: SplashViewModel
-    private var isAuthorized = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

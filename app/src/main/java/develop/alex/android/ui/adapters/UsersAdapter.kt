@@ -1,6 +1,5 @@
 package develop.alex.android.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,9 @@ class UsersAdapter
     var users: List<ListUserModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -27,7 +28,7 @@ class UsersAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      //  Log.d("UsersAdapter", "Notify item $position")
+        //  Log.d("UsersAdapter", "Notify item $position")
         val user = users[position]
         holder.tv.text = user.loginval
 
@@ -41,6 +42,7 @@ class UsersAdapter
     }
 
 }
-class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tv: TextView = view.text_name
 }

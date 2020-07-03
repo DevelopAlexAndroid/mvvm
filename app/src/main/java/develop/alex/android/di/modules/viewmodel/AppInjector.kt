@@ -1,4 +1,4 @@
-package develop.alex.android.di
+package develop.alex.android.di.modules.viewmodel
 
 import android.app.Activity
 import android.app.Application
@@ -10,6 +10,7 @@ import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import develop.alex.android.App
+import develop.alex.android.di.DaggerAppComponent
 
 /**
  * Пустой интерфейс, который провацирует автоматический inject activity или fragment
@@ -22,8 +23,7 @@ object AppInjector {
     //unchecked cast for ViewModel
     fun init(app: App) {
         // Here we initialize Dagger. DaggerAppComponent is auto-generated from AppComponent.
-        DaggerAppComponent
-            .builder()
+        DaggerAppComponent.builder()
             .application(app)
             .build()
             .inject(app)
@@ -37,7 +37,9 @@ object AppInjector {
                 override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
                 override fun onActivityStopped(activity: Activity) {}
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                    handleActivity(activity)
+                    handleActivity(
+                        activity
+                    )
                 }
             }
         )

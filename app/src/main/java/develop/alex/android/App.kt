@@ -5,7 +5,7 @@ import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import develop.alex.android.di.AppInjector
+import develop.alex.android.di.modules.viewmodel.AppInjector
 import javax.inject.Inject
 
 class App : Application(), HasActivityInjector {

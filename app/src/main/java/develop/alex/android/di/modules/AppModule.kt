@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import develop.alex.android.App
+import develop.alex.android.di.modules.viewmodel.ViewModelsModule
 import develop.alex.android.providers.SharedPreferencesProvider
 import javax.inject.Singleton
 

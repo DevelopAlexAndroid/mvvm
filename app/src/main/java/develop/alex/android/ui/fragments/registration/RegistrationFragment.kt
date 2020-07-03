@@ -5,10 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 
 import develop.alex.android.R
+import develop.alex.android.di.modules.viewmodel.Injectable
+import develop.alex.android.providers.ViewModelFactory
+import javax.inject.Inject
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(),
+    Injectable {
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private lateinit var viewModel: RegistrationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +29,11 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProviders
+            .of(this, factory)
+            .get(RegistrationViewModel::class.java)
+
 
     }
 

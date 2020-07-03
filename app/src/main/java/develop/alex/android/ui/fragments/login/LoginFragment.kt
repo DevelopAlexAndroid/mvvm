@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import develop.alex.android.R
-import develop.alex.android.di.Injectable
+import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.ViewModelFactory
-import develop.alex.android.ui.fragments.list_users.ListUsersFragment
-import kotlinx.android.synthetic.main.fragment_list_users.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-class LoginFragment : Fragment(), Injectable {
+class LoginFragment : Fragment(),
+    Injectable {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory

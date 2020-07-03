@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
-import develop.alex.android.di.Injectable
+import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.Const.ITEM_NAME
 import develop.alex.android.providers.ViewModelFactory
 import javax.inject.Inject
 
-class UserDetailsFragment : Fragment(), Injectable {
+class UserDetailsFragment : Fragment(),
+    Injectable {
 
     @Inject
     lateinit var factory: ViewModelFactory

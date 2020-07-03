@@ -7,7 +7,7 @@ import develop.alex.android.App
 import develop.alex.android.di.modules.ApiModule
 import develop.alex.android.di.modules.AppModule
 import develop.alex.android.di.modules.DataModule
-import develop.alex.android.di.modules.MainActivityModule
+import develop.alex.android.di.modules.ActivityModule
 import javax.inject.Singleton
 
 @Singleton
@@ -17,7 +17,7 @@ import javax.inject.Singleton
         AppModule::class,
         DataModule::class,
         ApiModule::class,
-        MainActivityModule::class
+        ActivityModule::class
     ]
 )
 interface AppComponent {
