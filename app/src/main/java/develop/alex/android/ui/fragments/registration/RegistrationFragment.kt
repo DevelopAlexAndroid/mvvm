@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import develop.alex.android.R
 import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_registration.*
 import javax.inject.Inject
 
 class RegistrationFragment : Fragment(),
@@ -34,6 +35,9 @@ class RegistrationFragment : Fragment(),
             .of(this, factory)
             .get(RegistrationViewModel::class.java)
 
+        but_registration.setOnClickListener {
+            viewModel.test()
+        }
 
     }
 

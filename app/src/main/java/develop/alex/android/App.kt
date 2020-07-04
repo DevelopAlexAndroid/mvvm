@@ -6,6 +6,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import develop.alex.android.di.modules.viewmodel.AppInjector
+import io.realm.Realm
 import javax.inject.Inject
 
 class App : Application(), HasActivityInjector {
@@ -13,9 +14,20 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
+    companion object {
+       // lateinit var realm: Realm
+        lateinit var app: App
+    }
+   // fun getRealm(): Realm = realm
+
     override fun onCreate() {
         super.onCreate()
         AppInjector.init(this)
+
+        app = this
+
+      //  Realm.init(this)
+      //  realm = Realm.getDefaultInstance()
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
