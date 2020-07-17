@@ -1,11 +1,15 @@
 package develop.alex.android.providers
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
+import develop.alex.android.R
 import develop.alex.android.data.pojo.ListUserModel
 import develop.alex.android.providers.adapters.DiffUtilCallback
 import develop.alex.android.ui.adapters.UsersAdapter
+import kotlinx.android.synthetic.main.fragment_login.*
 
 fun <K, V> ViewModel.lazyMap(initializer: (K) -> V): Map<K, V> {
     val map = mutableMapOf<K, V>()
@@ -40,3 +44,7 @@ fun Fragment.applyDiffAdapter(
     adapter.setData(newList)
     diff.dispatchUpdatesTo(adapter)
 }
+
+//Проблема быстро клика в nav_graph - краш
+fun checkFastClick(view : View, fragmentId: Int):
+        Boolean = view.findNavController().currentDestination?.id == fragmentId

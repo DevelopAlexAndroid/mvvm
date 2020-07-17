@@ -10,52 +10,38 @@ import androidx.navigation.findNavController
 import develop.alex.android.R
 import develop.alex.android.di.modules.viewmodel.Injectable
 import develop.alex.android.providers.ViewModelFactory
+import develop.alex.android.providers.checkFastClick
+import develop.alex.android.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-class LoginFragment : Fragment(),
-    Injectable {
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private lateinit var viewModel: LoginViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders
-            .of(this, viewModelFactory)
-            .get(LoginViewModel::class.java)
-
-        setupOnClick()
+        viewModel = injectViewModel()
     }
 
-    private fun setupOnClick() {
+    override fun setupUI() {
         but_come_in.setOnClickListener {
+            viewModel.sigIn()
             //Call to check apiKEy
         }
         but_register.setOnClickListener {
-            if (checkFastClick())
+            if (checkFastClick(but_demo, R.id.loginFragment))
                 but_come_in.findNavController()
                     .navigate(R.id.action_global_registrationFragment)
         }
         but_demo.setOnClickListener {
-            viewModel.sigIn()
-            if (checkFastClick())
+            if (checkFastClick(but_demo, R.id.loginFragment))
                 but_demo.findNavController()
                     .navigate(R.id.action_loginFragment_to_listUsersFragment)
         }
     }
 
-    //Проблема быстро клика в nav_graph - краш
-    private fun checkFastClick():
-            Boolean = but_demo.findNavController().currentDestination?.id == R.id.loginFragment
+    override fun setupObserver() {
 
+    }
 }

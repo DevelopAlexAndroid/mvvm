@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import develop.alex.android.R
 import develop.alex.android.data.pojo.ListUserModel
@@ -32,7 +33,7 @@ class UsersAdapter
         val user = users[position]
         holder.tv.text = user.loginval
 
-        holder.tv.setOnClickListener {
+        holder.item.setOnClickListener {
             listenerAdapter.itemClick(user.loginval)
         }
     }
@@ -45,4 +46,5 @@ class UsersAdapter
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tv: TextView = view.text_name
+    val item: ConstraintLayout = view.item
 }

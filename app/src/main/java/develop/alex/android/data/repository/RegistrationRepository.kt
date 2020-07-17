@@ -1,37 +1,51 @@
 package develop.alex.android.data.repository
 
 import android.util.Log
-import develop.alex.android.App
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import develop.alex.android.data.DataBaseLayer
 import develop.alex.android.data.pojo.UserM
 import develop.alex.android.providers.Const.APP_TAG
 import develop.alex.android.providers.SharedPreferencesProvider
-import io.realm.Realm
-import io.realm.RealmResults
+import io.realm.*
+import io.realm.kotlin.addChangeListener
+import io.realm.kotlin.where
 import javax.inject.Inject
 
 class RegistrationRepository
-@Inject constructor(var shprProvider: SharedPreferencesProvider, dbLayer: DataBaseLayer) {
-
-    private val realm: Realm =dbLayer.getRealm()
+@Inject constructor(var shprProvider: SharedPreferencesProvider, private var db: DataBaseLayer) {
 
     init {
-        val users: RealmResults<UserM> = realm.where(UserM::class.java).findAll()
+        /* val users: RealmResults<UserM> = realm.where(UserM::class.java).findAll()
 
-        users.addChangeListener { results, changeSet ->
-            // Query results are updated in real time with fine grained notifications.
-            Log.d(APP_TAG, "addChangeListener: ${changeSet.insertions} is added")
-            changeSet.insertions // => [0] is added.
-        }
+         users.addChangeListener { results, changeSet ->
+             // Query results are updated in real time with fine grained notifications.
+             Log.d(APP_TAG, "ChangeListener: ${results[0]?.email} is added")
+         }*/
+
+        /* realm.where<UserM>().findAll().addChangeListener { user ->
+             Log.d(APP_TAG, "ChangeListener22 ${user[0]?.email}")
+         }*/
+
     }
+
+    private val realm: Realm = db.getRealm()
+    val users: UserM? = realm.where(UserM::class.java).findFirst()
+    val testLiveData = MutableLiveData<UserM>()
+
 
     fun testSaveRealm(userM: UserM) {
         Log.d(APP_TAG, "testSaveRealm")
+        db.saveDataInDataBase(userM)
 
-        realm.beginTransaction()
-        realm.copyToRealmOrUpdate(userM)
-        realm.commitTransaction()
-
+        testLiveData.value = UserM(
+            1,
+            "name1",
+            "1",
+            "1",
+            "1"
+        )
     }
 
     fun testLoadRealm(): UserM? {

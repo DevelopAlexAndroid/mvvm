@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey
 
 open class UserM(
     @PrimaryKey
-    var id: Long = 0,
+    var number: Long = 0,
     var name: String = "",
     var surName: String = "",
     var email: String = "",

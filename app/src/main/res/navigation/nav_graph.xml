@@ -41,7 +41,11 @@
             android:id="@+id/userDetailsFragment"
             android:name="develop.alex.android.ui.fragments.user_details.UserDetailsFragment"
             android:label="fragment_user_details"
-            tools:layout="@layout/fragment_user_details" />
+            tools:layout="@layout/fragment_user_details" >
+            <action
+                android:id="@+id/action_userDetailsFragment_to_registrationFragment2"
+                app:destination="@id/registrationFragment2" />
+        </fragment>
         <fragment
             android:id="@+id/listUsersFragment"
             android:name="develop.alex.android.ui.fragments.list_users.ListUsersFragment"
@@ -55,5 +59,10 @@
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
+        <fragment
+            android:id="@+id/registrationFragment2"
+            android:name="develop.alex.android.ui.fragments.orgAutentif.RegistrationFragment"
+            android:label="fragment_registration_org"
+            tools:layout="@layout/fragment_registration_org" />
     </navigation>
 </navigation>

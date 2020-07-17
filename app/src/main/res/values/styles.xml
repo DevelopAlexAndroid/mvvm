@@ -20,4 +20,11 @@
         <item name="android:layout_marginTop">@dimen/margin_4dp</item>
     </style>
 
+
+    <!--BUTTOn-->
+    <style name="OvalButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_oval_selector</item>
+        <item name="android:textColor">@color/colorGrey</item>
+    </style>
+
 </resources>

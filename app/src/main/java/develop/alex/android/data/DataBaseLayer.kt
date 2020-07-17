@@ -2,6 +2,7 @@ package develop.alex.android.data
 
 import android.content.Context
 import io.realm.Realm
+import io.realm.RealmObject
 import javax.inject.Inject
 
 class DataBaseLayer
@@ -16,5 +17,10 @@ class DataBaseLayer
 
     fun getRealm(): Realm = realm
 
+    fun <T: RealmObject> saveDataInDataBase(value: T) {
+        realm.beginTransaction()
+        realm.copyToRealmOrUpdate(value)
+        realm.commitTransaction()
+    }
 
 }

@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import develop.alex.android.data.repository.LoginRepository
 import develop.alex.android.providers.Const
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginViewModel
@@ -14,24 +12,22 @@ class LoginViewModel
     private val repository: LoginRepository
 ) : ViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
+    private val cmpDis = CompositeDisposable()
 
     fun sigIn() {
-        compositeDisposable.add(repository.sigIn()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    Log.d(Const.APP_TAG, "LoginViewModel.Success")
-                }, {
-                    Log.d(Const.APP_TAG, "LoginViewModel.Fail = ${it.message}")
-                })
+        cmpDis.add(
+            repository.sigIn().subscribe({
+                Log.d(Const.APP_TAG, "LoginViewModel.Success")
+            }, {
+                Log.d(Const.APP_TAG, "LoginViewModel.Fail = ${it.message}")
+            })
         )
     }
 
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable.clear()
+        Log.d(Const.APP_TAG, "LoginViewModel.onCleared")
+        cmpDis.clear()
     }
 
 }

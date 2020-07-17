@@ -54,7 +54,7 @@ data class UserModel(
     val siteAdmin: Boolean,
     @SerializedName("name")
     @Expose
-    val name: String,
+    var name: String,
     @SerializedName("company")
     @Expose
     val company: String,

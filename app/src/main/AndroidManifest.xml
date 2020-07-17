@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <!--MainActivity-->
-        <activity android:name="develop.alex.android.ui.activity.main.MainActivity">
+        <activity android:name="develop.alex.android.ui.activity.main.MainActivity"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MainActivity" />
                 <category android:name="android.intent.category.MainActivity" />

@@ -1,12 +1,10 @@
 package develop.alex.android.di.modules
 
 import com.androidnetworking.interceptors.HttpLoggingInterceptor
-import com.rx2androidnetworking.Rx2ANRequest
 import dagger.Module
 import dagger.Provides
 import develop.alex.android.data.ApiGitHub
 import develop.alex.android.providers.Const
-import io.reactivex.plugins.RxJavaPlugins
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

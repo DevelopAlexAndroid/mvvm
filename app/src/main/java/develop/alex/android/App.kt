@@ -14,20 +14,9 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-    companion object {
-       // lateinit var realm: Realm
-        lateinit var app: App
-    }
-   // fun getRealm(): Realm = realm
-
     override fun onCreate() {
         super.onCreate()
         AppInjector.init(this)
-
-        app = this
-
-      //  Realm.init(this)
-      //  realm = Realm.getDefaultInstance()
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector

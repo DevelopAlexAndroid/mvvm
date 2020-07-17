@@ -18,6 +18,10 @@ import javax.inject.Inject
 class ListUsersViewModel
 @Inject constructor(private val repository: ListUsersRepository) : ViewModel() {
 
+    init {
+        //загрузка данных при старте фрагмента только 1 раз
+    }
+
     private val compositeDisposable = CompositeDisposable()
     override fun onCleared() {
         super.onCleared()
@@ -32,7 +36,7 @@ class ListUsersViewModel
 
     //load in lifeCycle
     var users = MutableLiveData<List<ListUserModel>>()
-    fun onCreate() {
+    fun setupLoadDataInLifeCycleMethod() {
         Log.d(APP_TAG, "ListUsersViewModel.onCreate")
         compositeDisposable.add(getUsers().subscribe(
             { res ->
@@ -88,17 +92,24 @@ class ListUsersViewModel
         return loadUsersLazyMapOnlyOnceAndGiveParamsWithMvi.getValue(parameter)
     }
 
-    private val loadUsersLazyMapOnlyOnceAndGiveParamsWithMvi: Map<ListUsersParameters, MutableLiveData<ListUsersState>> =
+    private val loadUsersLazyMapOnlyOnceAndGiveParamsWithMvi:
+            Map<ListUsersParameters, MutableLiveData<ListUsersState>> =
         this.lazyMap { parameter ->
             Log.d(APP_TAG, "parameter = ${parameter.id}")
             val listUsersLazyMap = MutableLiveData<ListUsersState>()
+            //Loading
             listUsersLazyMap.value = ListUsersState.Loading
             compositeDisposable.add(getUsers().subscribe(
                 { res ->
-                    Log.d(APP_TAG, "loadUsersLazyMapOnlyOnceAndGiveParamsWithMvi with parameter = $parameter")
+                    Log.d(
+                        APP_TAG,
+                        "loadUsersLazyMapOnlyOnceAndGiveParamsWithMvi with parameter = $parameter"
+                    )
+                    //Success
                     listUsersLazyMap.value = ListUsersState.ShowData(res)
                 },
                 {
+                    //Error
                     listUsersLazyMap.value = ListUsersState.ErrorNetwork
                     Log.d(APP_TAG, it.message.toString())
                 }
@@ -107,7 +118,6 @@ class ListUsersViewModel
         }
 
     private fun getUsers(): Single<List<ListUserModel>> {
-        Log.d(APP_TAG, "ListUsersViewModel.onCreate")
         return repository.getUsers()
             .subscribeOn(Schedulers.io())
             .delay(2000, TimeUnit.MILLISECONDS)

@@ -6,4 +6,8 @@
     <color name="colorGrey">#dddddd</color>
     <color name="colorBlue">#0713FF</color>
 
+
+    <color name="colorDisableButton">#707077</color>
+    <color name="colorEnableButton">#5961FD</color>
+
 </resources>
